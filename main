@@ -1,0 +1,25 @@
+import telebot
+from telebot import types
+
+
+bot = telebot.TeleBot('5841158104:AAHmwJvQHPoIBzGznO8mj1RzGPKy4d7aDmc')
+
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    mess = f'Здравствуйте,<b> {message.from_user.first_name} {message.from_user.last_name}</b>, для получения статуса заявки можете воспользоваться подсказками ниже!'
+    bot.send_message(message.chat.id, mess, parse_mode='html')
+
+
+
+@bot.message_handler(content_types=['status'])
+def status(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    status = types.KeyboardButton('узнать статус заявки')
+    markup.add(status)
+    bot.send_message(message.chat.id, 'ваша заявка номер – 1234567890 принята на рассмотрение', reply_markup=markup)
+
+
+
+
+bot.polling(none_stop=True)
