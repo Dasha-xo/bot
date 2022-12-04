@@ -12,7 +12,7 @@ def start(message):
 
 
 
-@bot.message_handler(content_types=['status'])
+@bot.message_handler(commands=['status'])
 def status(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     status = types.KeyboardButton('узнать статус заявки')
